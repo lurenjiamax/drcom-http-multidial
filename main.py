@@ -24,17 +24,13 @@ conn = [
 tmp_file = "/tmp/drcom_result.txt"
 #CONFIG END
 
-def check_status(interface):# If you don't use mwan3, you should manually change this function.
-	os.system("/usr/sbin/mwan3 status > {}".format(tmp_file))
-	try:
-		with open(tmp_file,'r',encoding='ascii',errors='ignore') as file:
-			result = file.read()
-			if result.find("interface {} is offline".format(interface)) != -1:
-				return False
-			else:
-				return True
-	except:
-		return True
+def check_status(interface):
+    testhost = "114.114.114.114"
+    response = os.system("ping -c 1 -w2 -I {} {} > /dev/null 2>&1" .format(interface,testhost) )
+    if response == 0:
+        return True
+    else:
+        return False
 
 
 def do_login(username,password,interface,R6="0"):
