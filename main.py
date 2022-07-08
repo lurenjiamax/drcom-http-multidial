@@ -38,7 +38,7 @@ def do_login(username,password,interface,R6="0"):
 		R6 = "1"
 	else:
 		R6 = "0"
-	os.system("curl -m 10 --interface {} -H 'Uip: va5=1.2.3.4.' {} --data '0MKKey=0123456789&R6={}' --data-urlencode 'DDDDD={}' --data-urlencode 'upass={}' -k 1> /dev/null 2> /dev/null".format(interface,authserver,R6,username,password))
+	os.system("mwan3 use {} curl -m 10 -H 'Uip: va5=1.2.3.4.' {} --data '0MKKey=0123456789&R6={}' --data-urlencode 'DDDDD={}' --data-urlencode 'upass={}' -k 1> /dev/null 2> /dev/null".format(interface,authserver,R6,username,password))
 
 def write_pid():
 	with open('/var/run/drcom.pid','w') as file:
